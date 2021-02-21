@@ -11,7 +11,7 @@ public class MainView extends TabPane {
         Tab beersTab = createTab("Beers");
         Tab brewersTab = createTab("Brewers");
 
-        this.getTabs().addAll(connectionTab, categoriesTab, beersTab, brewersTab);
+        this.getTabs().addAll(connectionTab, categoriesTab, brewersTab, beersTab);
     }
 
     private Tab createTab(String name, Node node) {

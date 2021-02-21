@@ -15,13 +15,6 @@ public class FakeCategoryService implements CategoryService {
     }
 
     @Override
-    public List<Category> getCategories(String filterByNameContaining) {
-        return this.categories.stream()
-                .filter(category -> category.getCategoryName().contains(filterByNameContaining))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public Category createCategory(Category category) {
         Category cat = new Category(99, category.getCategoryName());
         categories.add(cat);
@@ -35,8 +28,8 @@ public class FakeCategoryService implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(Category category) {
-
+    public boolean deleteCategory(Category category) {
+        return true;
     }
 
     private List<Category> generateFakeList() {

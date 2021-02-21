@@ -97,8 +97,20 @@ public class CategoryView extends GridPane {
     }
 
     private void deleteCategory(ActionEvent event) {
-        System.out.println("Delete button pressed");
-        errorText.setText("Clicked");
+        boolean deleted = service.deleteCategory(new Category(
+                Integer.parseInt(this.categoryID.getText()),
+                this.categoryName.getText()
+        ));
+
+        if (deleted) {
+            this.table.getItems().stream()
+                    .filter(category -> category.getId().equals(Integer.parseInt(this.categoryID.getText())))
+                    .findFirst()
+                    .ifPresentOrElse(
+                            category -> this.table.getItems().remove(category),
+                            () -> errorText.setText("Selected category was not found in view")
+                    );
+        }
     }
 
 }
