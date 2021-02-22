@@ -9,7 +9,7 @@ public class MainView extends TabPane {
         Tab connectionTab = createTab("Connection", new ConnectionView());
         Tab categoriesTab = createTab("Categories", new CategoryView());
         Tab beersTab = createTab("Beers");
-        Tab brewersTab = createTab("Brewers");
+        Tab brewersTab = createTab("Brewers", new BrewersView());
 
         this.getTabs().addAll(connectionTab, categoriesTab, brewersTab, beersTab);
     }

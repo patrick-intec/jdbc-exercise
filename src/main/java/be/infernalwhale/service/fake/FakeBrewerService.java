@@ -19,7 +19,7 @@ public class FakeBrewerService implements BrewersService {
     @Override
     public List<Brewer> getBrewers(String nameFilter) {
         return this.brewers.stream()
-                .filter(brewer -> brewer.getName().toLowerCase(nameFilter.toLowerCase()))
+                .filter(brewer -> brewer.getName().equalsIgnoreCase(nameFilter))
                 .collect(Collectors.toList());
     }
 

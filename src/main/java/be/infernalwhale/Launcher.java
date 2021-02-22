@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class Launcher extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Scene scene = new Scene(new MainView(), 640, 480);
+        Scene scene = new Scene(new MainView(), 800, 600);
         stage.setScene(scene);
         stage.show();
     }
