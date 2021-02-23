@@ -10,6 +10,8 @@ Start by cloning the repository with the link provided to you and opening it in 
     Linux/Mac: rm -vfr .git/
     Windows: del /F /Q /S .git
 ```
+Then create your own repository in the project and share that project with me on github.
+
 
 ## Guidelines for the exercise
 
