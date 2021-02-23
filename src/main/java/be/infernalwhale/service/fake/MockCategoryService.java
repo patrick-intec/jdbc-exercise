@@ -6,7 +6,7 @@ import be.infernalwhale.service.CategoryService;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class FakeCategoryService implements CategoryService {
+public class MockCategoryService implements CategoryService {
     private final List<Category> categories = generateFakeList();
 
     @Override

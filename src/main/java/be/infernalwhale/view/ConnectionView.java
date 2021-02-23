@@ -16,6 +16,9 @@ import javafx.scene.text.FontWeight;
 
 import java.sql.SQLException;
 
+/**
+ * Do not change ANYTHING in this class
+ */
 public class ConnectionView extends GridPane {
     private ConnectionManager connectionManager = ServiceFactory.createConnectionManager();
 

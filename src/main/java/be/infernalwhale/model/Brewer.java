@@ -17,6 +17,15 @@ public class Brewer {
         this.turnover = turnover;
     }
 
+    public Brewer(Brewer brewer) {
+        this.id = brewer.id;
+        this.name = brewer.name;
+        this.address = brewer.address;
+        this.zipcode = brewer.zipcode;
+        this.city = brewer.city;
+        this.turnover = brewer.turnover;
+    }
+
     public Integer getId() {
         return id;
     }

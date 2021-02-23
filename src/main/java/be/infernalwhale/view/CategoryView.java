@@ -3,6 +3,7 @@ package be.infernalwhale.view;
 import be.infernalwhale.model.Category;
 import be.infernalwhale.service.CategoryService;
 import be.infernalwhale.service.ServiceFactory;
+import be.infernalwhale.service.exception.ValidationException;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -13,6 +14,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+/**
+ * Do not change ANYTHING in this class
+ */
 public class CategoryView extends GridPane {
     private final CategoryService service = ServiceFactory.createCategoryService();
 
@@ -20,9 +24,6 @@ public class CategoryView extends GridPane {
     private final TableView<Category> table = new TableView<>();
     private final TextField categoryID = new TextField();
     private final TextField categoryName = new TextField();
-    private final Button createButton = new Button("Create New");
-    private final Button saveButton = new Button("Save");
-    private final Button deleteButton = new Button("Delete");
     private final Label errorText = new Label();
 
     public CategoryView() {
@@ -45,17 +46,24 @@ public class CategoryView extends GridPane {
 
         table.getColumns().add(col1);
         table.getColumns().add(col2);
-        table.getItems().addAll(service.getCategories());
         table.getSelectionModel().selectedItemProperty().addListener(this::itemSelected);
 
         this.add(catLabel, 0, 0);
         this.add(table, 0, 1);
+
+        Button readCats = new Button("Read Cats ^o^");
+        readCats.setOnAction(event -> readCategoriesFromDB());
+        this.add(readCats, 0, 2);
 
         GridPane form = new GridPane();
         form.add(new Label("ID: "), 0, 0);
         form.add(new Label("Name: "), 0, 1);
         form.add(categoryID, 1, 0);
         form.add(categoryName, 1, 1);
+
+        Button createButton = new Button("Create New");
+        Button saveButton = new Button("Save");
+        Button deleteButton = new Button("Delete");
 
         createButton.setOnAction(this::createCategory);
         saveButton.setOnAction(this::saveCategory);
@@ -69,14 +77,23 @@ public class CategoryView extends GridPane {
         this.add(form, 1, 1);
     }
 
+    private void readCategoriesFromDB() {
+        table.getItems().addAll(service.getCategories());
+    }
+
     private void itemSelected(ObservableValue<? extends Category> observableValue, Category previousSelection, Category newSelection) {
         this.categoryID.setText(newSelection.getId().toString());
         this.categoryName.setText(newSelection.getCategoryName());
     }
 
     private void createCategory(ActionEvent event) {
-        Category newCat = service.createCategory(new Category(null, this.categoryName.getText()));
-        this.table.getItems().add(newCat);
+        Category newCat = null;
+        try {
+            newCat = service.createCategory(new Category(null, this.categoryName.getText()));
+            this.table.getItems().add(newCat);
+        } catch (ValidationException e) {
+            errorText.setText(e.getMessage());
+        }
     }
 
     private void saveCategory(ActionEvent event) {

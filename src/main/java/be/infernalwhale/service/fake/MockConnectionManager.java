@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
-public class FakeConnectionManager implements ConnectionManager {
+public class MockConnectionManager implements ConnectionManager {
     private Connection connection;
 
     @Override

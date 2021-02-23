@@ -6,9 +6,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Launcher extends Application {
+    public static Scene currentScene;
+
     @Override
     public void start(Stage stage) throws Exception {
-        Scene scene = new Scene(new MainView(), 800, 600);
+        Scene scene = new Scene(new MainView(), 1024, 600);
+        currentScene = scene;
         stage.setScene(scene);
         stage.show();
     }
